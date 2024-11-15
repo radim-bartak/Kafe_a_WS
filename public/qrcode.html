@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <title>QR Kód pro Registraci</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="order.html">Objednávky</a>
+            <a href="summary.html">Souhrn</a>
+            <a href="tasks.html">Úkoly</a>
+            <a href="qrcode.html">QR Kód</a>
+        </nav>
+    </header>
+
+    <div class="content-container">
+        <h1>Generovat QR kód pro registraci</h1>
+        <button onclick="generateQRCode()">Vygenerovat</button>
+        <p id="qrMessage" style="display:none;"></p> 
+        <ul id="coffeeQR"></ul>
+    </div>
+
+    <script src="js/client.js"></script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+/* Globální styl pro reset a základní font */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+}
+
+body {
+    font-family: Arial, sans-serif;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: url('../img/coffee.jpg') no-repeat center center fixed;
+    background-size: cover;
+    line-height: 1.6;
+}
+
+/* Styl pro navigační lištu */
+header {
+    width: 39%;
+    background-color: #333;
+    padding: 10px;
+    text-align: center;
+    border-radius: 15px;
+}
+
+header nav a {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+header nav a:hover {
+    text-decoration: underline;
+}
+
+h1, h2, h3 {
+    margin-bottom: 20px; /* Větší mezera pod nadpisy */
+}
+
+p, li {
+    margin-bottom: 30px; /* Větší mezera mezi odstavci a položkami seznamu */
+}
+
+button {
+    margin-bottom: 10px;
+    padding: 10px 20px; /* Větší vnitřní odsazení pro tlačítka */
+    text-align: center;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0073ff;
+    color: white;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+  }
+
+label, input {
+    display: block;
+    margin-bottom: 10px;
+    
+}
+
+input{
+    margin-left: 200px;
+}
+
+.username-display {
+    font-size: 0.9em;
+    color: #555;
+    text-align: center;
+    margin: 10px 0;
+}
+
+.content-container {
+    background-color: rgba(255, 255, 255, 1);
+    width: 80vw;
+    max-width: 600px;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-top: 20px;
+    text-align: center; 
+}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <title>Registrace</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="content-container">
+    <h1>Registrace</h1>
+        <form id="registerForm">
+            <label>Uživatelské jméno: <input type="text" id="username" required></label>
+            <label>Heslo: <input type="password" id="password" required></label>
+            <button type="button" onclick="register()">Registrovat</button>
+        </form>
+    </div>
+
+    <script>
+        function register() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            fetch('http://localhost:3000/auth/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ username, password }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    alert(data.error);
+                } else {
+                    alert('Registrace úspěšná');
+                    localStorage.setItem('token', data.token); // Uložení tokenu
+                    window.location.href = 'order.html'; // Přesměrování na hlavní stránku
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html>

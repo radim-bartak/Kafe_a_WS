@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <title>Objednávky Kávy</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="order.html">Objednávky</a>
+            <a href="summary.html">Souhrn</a>
+            <a href="tasks.html">Úkoly</a>
+            <a href="qrcode.html">QR Kód</a>
+        </nav>
+    </header>
+    
+    <div class="content-container">
+        <h1>Objednávky</h1>
+        <div class="slider-container">
+            <label>Coffee: <span id="coffeeValue">0</span></label>
+            <input type="range" id="coffee" min="0" max="10" value="0" oninput="updateSliderValue('coffee')">
+        </div>
+        <div class="slider-container">
+            <label>Doppio: <span id="doppioValue">0</span></label>
+            <input type="range" id="doppio" min="0" max="10" value="0" oninput="updateSliderValue('doppio')">
+        </div>
+        <div class="slider-container">
+            <label>Espresso: <span id="espressoValue">0</span></label>
+            <input type="range" id="espresso" min="0" max="10" value="0" oninput="updateSliderValue('espresso')">
+        </div>
+        <div class="slider-container">
+            <label>Long: <span id="longValue">0</span></label>
+            <input type="range" id="long" min="0" max="10" value="0" oninput="updateSliderValue('long')">
+        </div>
+        <div class="slider-container">
+            <label>Milk: <span id="milkValue">0</span></label>
+            <input type="range" id="milk" min="0" max="10" value="0" oninput="updateSliderValue('milk')">
+        </div>
+        <button onclick="submitOrder()">Odeslat objednávku</button>
+    </div>
+
+
+    
+    <script src="js/client.js"></script>
+</body>
+</html>

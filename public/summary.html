@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <title>Souhrn Objednávek</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="order.html">Objednávky</a>
+            <a href="summary.html">Souhrn</a>
+            <a href="tasks.html">Úkoly</a>
+            <a href="qrcode.html">QR Kód</a>
+        </nav>
+    </header>
+
+    <div class="content-container">
+        <h1>Souhrn Objednávek</h1>
+        <button onclick="getSummary()">Načíst Souhrn</button>
+        <ul id="orderSummary"></ul>
+    </div>
+
+    <script src="js/client.js"></script>
+</body>
+</html>

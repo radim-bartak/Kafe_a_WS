@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <title>Přihlášení</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="register.html">Registrovat se</a>
+        </nav>
+    </header>
+    
+    <div class="content-container">
+        <h1>Přihlášení</h1>
+        <form id="loginForm">
+            <label>Uživatelské jméno: <input type="text" id="username" required></label>
+            <label>Heslo: <input type="password" id="password" required></label>
+            <button type="button" onclick="login()">Přihlásit</button>
+        </form>
+    </div>
+
+    <script>
+        function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            fetch('http://localhost:3000/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ username, password }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    alert(data.error);
+                } else {
+                    alert('Přihlášení úspěšné');
+                    localStorage.setItem('token', data.token);
+                    window.location.href = 'order.html';
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html>
