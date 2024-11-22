@@ -2,8 +2,9 @@
 <html lang="cs">
 <head>
     <meta charset="UTF-8">
-    <title>QR Kód pro Registraci</title>
+    <title>Terminál Objednávek</title>
     <link rel="stylesheet" href="css/style.css">
+    <script src="js/client.js" defer></script>
 </head>
 <body>
     <header>
@@ -16,13 +17,11 @@
         </nav>
     </header>
 
-    <div class="content-container">
-        <h1>Generovat QR kód pro registraci</h1>
-        <button onclick="generateQRCode()">Vygenerovat</button>
-        <p id="qrMessage" style="display:none;"></p> 
-        <ul id="coffeeQR"></ul>
+    <div class="terminal-container">
+        <h1>Terminál Objednávek</h1>
+        <div id="terminal" class="terminal">
+            <p>Načítám objednávky...</p>
+        </div>
     </div>
-
-    <script src="js/client.js"></script>
 </body>
 </html>

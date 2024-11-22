@@ -33,8 +33,8 @@
                     alert(data.error);
                 } else {
                     alert('Registrace úspěšná');
-                    localStorage.setItem('token', data.token); // Uložení tokenu
-                    window.location.href = 'order.html'; // Přesměrování na hlavní stránku
+                    localStorage.setItem('token', data.token);
+                    window.location.href = 'order.html'; 
                 }
             })
             .catch(error => console.error('Error:', error));

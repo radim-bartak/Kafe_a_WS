@@ -1,13 +1,11 @@
-/* Globální styl pro reset a základní font */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif, monospace;
 }
 
 body {
-    font-family: Arial, sans-serif;
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -18,7 +16,6 @@ body {
     line-height: 1.6;
 }
 
-/* Styl pro navigační lištu */
 header {
     width: 39%;
     background-color: #333;
@@ -39,19 +36,20 @@ header nav a:hover {
 }
 
 h1, h2, h3 {
-    margin-bottom: 20px; /* Větší mezera pod nadpisy */
+    margin-bottom: 20px;
 }
 
 p, li {
-    margin-bottom: 30px; /* Větší mezera mezi odstavci a položkami seznamu */
+    margin-bottom: 30px;
 }
 
 button {
     margin-bottom: 10px;
-    padding: 10px 20px; /* Větší vnitřní odsazení pro tlačítka */
+    padding: 10px 20px;
     text-align: center;
     transition-duration: 0.4s;
     cursor: pointer;
+    border-radius: 8px;
 }
 
 button:hover {
@@ -66,15 +64,9 @@ label, input {
     
 }
 
-input{
-    margin-left: 200px;
-}
-
-.username-display {
-    font-size: 0.9em;
-    color: #555;
-    text-align: center;
-    margin: 10px 0;
+input[type=text], input[type=password]{
+    max-width: fit-content;
+    margin-inline: auto;
 }
 
 .content-container {
@@ -83,7 +75,78 @@ input{
     max-width: 600px;
     padding: 30px;
     border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
     margin-top: 20px;
     text-align: center; 
+}
+
+.slider-container{
+    max-width: fit-content;
+    margin-inline: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th, table td {
+    padding: 12px 15px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+table th {
+    background-color: #333;
+    color: white;
+    font-weight: bold;
+}
+
+table td {
+    background-color: #f9f9f9;
+}
+
+table tr:nth-child(even) td {
+    background-color: #f2f2f2;
+}
+
+table tr:hover td {
+    background-color: #e0e0e0;
+}
+
+.task-container{
+    background-color: rgba(255, 255, 255, 1);
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 800px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+    border-radius: 15px;
+    text-align: center; 
+}
+
+.terminal-container{
+    background-color: rgba(255, 255, 255, 1);
+    width: 80vw;
+    max-width: 700px;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    margin-top: 20px;
+    text-align: center; 
+}
+
+.terminal {
+    background-color: #1e1e1e;
+    color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    height: 400px;
+    overflow-y: scroll;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.terminal .log-entry {
+    margin-bottom: 10px;
+    font-family:monospace;
 }

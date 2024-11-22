@@ -31,6 +31,7 @@ router.get('/summary', (req, res) => {
                 SUM(CASE WHEN coffee_id = 5 THEN count ELSE 0 END) AS total_milk
          FROM coffee_log
          JOIN user ON coffee_log.user_id = user.id
+         WHERE coffee_log.created_at >= DATE_SUB(NOW(), INTERVAL 1 MONTH)
          GROUP BY user.username`,
         (err, results) => {
             if (err) {
@@ -42,5 +43,21 @@ router.get('/summary', (req, res) => {
     );
 });
 
+router.get("/all", (req, res) => {
+    db.query(
+        `SELECT coffee_log.id AS order_id, user.username, coffee_log.created_at, coffee.name AS coffee_type, coffee_log.count
+         FROM coffee_log
+         JOIN user ON coffee_log.user_id = user.id
+         JOIN coffee ON coffee_log.coffee_id = coffee.id
+         ORDER BY coffee_log.created_at DESC`,
+        (err, results) => {
+            if (err) {
+                console.error("Chyba při získávání objednávek:", err);
+                return res.status(500).json({ error: "Chyba serveru" });
+            }
+            res.json(results);
+        }
+    );
+});
 
 module.exports = router;

@@ -6,26 +6,44 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <!-- Navigační menu -->
     <header>
         <nav>
             <a href="order.html">Objednávky</a>
             <a href="summary.html">Souhrn</a>
             <a href="tasks.html">Úkoly</a>
+            <a href="terminal.html">Terminál</a>
             <a href="qrcode.html">QR Kód</a>
         </nav>
     </header>
 
-    <div class="content-container">
-        <h1>Úkoly</h1>
-        <ul id="taskList"></ul>
-        <button onclick="loadTasks()">Načíst Úkoly</button>
-        <br>
-        <button onclick="clearTasks()">Vymazat Dokončené Úkoly</button>
-
-        <h3>Přidat Úkol</h3>
-        <label>Název úkolu: <input type="text" id="taskTitle"></label><br>
+    	<div class="task-container">
+    	<h1>Úkoly</h1>
+    
+    	<table id="taskTable">
+       	<thead>
+            	<tr>
+                <th>Úkol</th>
+                <th>Vytvořil</th>
+                <th>Převzal</th>
+                <th>Datum Vytvoření</th>
+                <th>Stav</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody id="taskList">
+        </tbody>
+    </table>
+    
+    <br>
+    <button onclick="loadTasks()">Načíst Úkoly</button>
+    <br>
+    <button onclick="clearTasks()">Vymazat Dokončené Úkoly</button>
+    <br><br>
+    <h3>Přidat Úkol</h3>
+        <div>
+        <label>Název úkolu: <input type="text" id="taskTitle"></label>
         <button onclick="addTask(document.getElementById('taskTitle').value)">Přidat úkol</button>
+        </div>
     </div>
 
     <script src="js/client.js"></script>

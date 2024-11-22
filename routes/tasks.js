@@ -1,9 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../utils/db');
-const { verifyToken } = require('../utils/auth'); // Pro ověření tokenu
+const { verifyToken } = require('../utils/auth');
 
-// Endpoint pro přidání nového úkolu
 router.post('/add_task', (req, res) => {
     const { token, title} = req.body;
     if (!token) return res.status(401).json({ error: 'Token must be provided' });
@@ -37,24 +36,36 @@ router.post('/add_task', (req, res) => {
     }
 });
 
-// Endpoint pro dokončení úkolu
 router.post('/complete_task', (req, res) => {
     const { token, task_id } = req.body;
     const user = verifyToken(token);
     if (!user) return res.status(401).json({ error: 'Invalid token' });
 
-    db.query('UPDATE task_log SET is_completed = TRUE, assigned_to = (?) WHERE task_id = (?)', [user.id, task_id], (err, result) => {
+    db.query('UPDATE task_log SET is_completed = TRUE WHERE task_id = (?)', [task_id], (err, result) => {
             if (err) {
                 console.error(err);
                 return res.status(500).json({ error: 'Internal server error' });
             }
-            res.json({ message: 'Úkol označen jako dokončený' });
+            res.json({ message: 'Úkol označen jako dokončený.' });
         }
     );
 });
 
+router.post('/assign_task', (req, res) => {
+    const { token, task_id } = req.body;
+    const user = verifyToken(token);
+    if (!user) return res.status(401).json({ error: 'Invalid token' });
 
-// Endpoint pro vymazání dokončených úkolů
+    db.query('UPDATE task_log SET assigned_to = (?) WHERE task_id = (?)', [user.id, task_id], (err, result) => {
+            if (err) {
+                console.error(err);
+                return res.status(500).json({ error: 'Internal server error' });
+            }
+            res.json({ message: 'Úkol převzat.' });
+        }
+    );
+});
+
 router.post('/clear_tasks', (req, res) => {
     const { token } = req.body;
     if (!token) return res.status(401).json({ error: 'Token must be provided' });
@@ -76,7 +87,6 @@ router.post('/clear_tasks', (req, res) => {
     }
 });
 
-// Endpoint pro načtení seznamu úkolů
 router.get('/tasks', (req, res) => {
     db.query(
         `SELECT task.id as task_id, task.title, task_log.is_completed, task_log.created_at, 
@@ -94,4 +104,5 @@ router.get('/tasks', (req, res) => {
         }
     );
 });
+
 module.exports = router;
