@@ -4,10 +4,13 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const QRCode = require('qrcode');
 const http = require('http');
+const WebSocket = require("ws");
 
 const app = express();
 const server = http.createServer(app);
+const wss = new WebSocket.Server({ server });
 const port = 3001;
+
 app.use(bodyParser.json());
 app.use(cors());
 app.use((req, res, next) => {
@@ -42,7 +45,19 @@ app.post('/generate_qr', (req, res) => {
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+wss.on("connection", (ws) => {
+    console.log("Nové WebSocket připojení");
 
+    ws.send(JSON.stringify({ message: "Připojeno k WebSocket serveru." }));
+});
+
+function broadcastNewOrder(order) {
+    wss.clients.forEach((client) => {
+        if (client.readyState === WebSocket.OPEN) {
+            client.send(JSON.stringify({ type: "newOrder", order }));
+        }
+    });
+}
 
 app.listen(3000, () => {
     console.log('Server started on port 3000');
