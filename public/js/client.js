@@ -1,39 +1,4 @@
-
-let socket;
-
-function initWebSocket() {
-    socket = new WebSocket("ws://localhost:3000");
-
-    socket.onopen = () => {
-        console.log("WebSocket připojen.");
-    };
-
-    socket.onmessage = (event) => {
-        const message = JSON.parse(event.data);
-        if (message.type === "newOrder") {
-            const order = message.order;
-            addOrderToTerminal(order);
-        }
-    };
-
-    socket.onerror = (error) => {
-        console.error("WebSocket chyba:", error);
-    };
-
-    socket.onclose = () => {
-        console.warn("WebSocket odpojen. Pokouším se znovu připojit...");
-        setTimeout(initWebSocket, 5000);
-    };
-}
-
-function addOrderToTerminal(order) {
-    const terminal = document.getElementById("terminal");
-
-    const logEntry = document.createElement("div");
-    logEntry.className = "log-entry";
-    logEntry.innerText = `${order.created_at} | Uživatelské jméno: ${order.username} | Coffee: ${order.details.coffee}, Doppio: ${order.details.doppio}, Espresso: ${order.details.espresso}, Long: ${order.details.long}, Milk: ${order.details.milk}`;
-    terminal.prepend(logEntry);
-}
+const ws = 'ws://localhost:3001';
 
 function addTask(title) {
     const token = localStorage.getItem('token');
@@ -284,17 +249,10 @@ function loadOrders() {
             }
 
             orders.forEach((order) => {
-                addOrderToTerminal({
-                    username: order.username,
-                    created_at: order.created_at,
-                    details: {
-                        coffee: order.coffee_count,
-                        doppio: order.doppio_count,
-                        espresso: order.espresso_count,
-                        long: order.long_count,
-                        milk: order.milk_count,
-                    },
-                });
+                const logEntry = document.createElement("div");
+                logEntry.className = "log-entry";
+                logEntry.innerText = `${order.created_at} | Uživatelské jméno: ${order.username} | ${order.coffee_type} (${order.count}x)`;
+                terminal.appendChild(logEntry);
             });
         })
         .catch((error) => {
@@ -339,7 +297,6 @@ function generateQRCode() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    initWebSocket();
     loadTasks();
     loadOrders();
     getSummary();

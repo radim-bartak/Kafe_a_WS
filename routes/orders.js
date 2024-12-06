@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const db = require('../utils/db');
 const { verifyToken } = require('../utils/auth');
-const { broadcastNewOrder } = require("../server");
 
 router.post('/order', (req, res) => {
     const { token, coffee, doppio, espresso, long, milk } = req.body;
@@ -17,14 +16,6 @@ router.post('/order', (req, res) => {
                 console.error(err);
                 return res.status(500).json({ error: 'Internal server error' });
             }
-            
-            const newOrder = {
-                username: user.username,
-                created_at: new Date().toISOString(),
-                details: { coffee, doppio, espresso, long, milk },
-            };
-            broadcastNewOrder(newOrder);
-
             res.json({ message: 'Objednávka úspěšně přijata' });
         }
     );
